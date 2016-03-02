@@ -1,17 +1,18 @@
 import os
 import sys
 
+from pathlib import Path
 from setuptools import setup
 from setuptools import find_packages
 from setuptools.command.test import test as TestCommand
 
 
-here = lambda path: os.path.join(os.path.abspath(os.path.dirname(__file__)), path)
+here = Path(os.path.abspath(os.path.dirname(__file__)))
 
-with open(here('README.rst')) as f:
+with here.joinpath('README.rst').open() as f:
     README = f.read()
 
-with open(here('requirements.txt')) as f:
+with here.joinpath('requirements.txt').open() as f:
     rows = f.read().strip().split('\n')
     requires = []
     for row in rows:
@@ -43,7 +44,7 @@ class PyTest(TestCommand):
 # Setup
 # ----------------------------
 
-setup(name='maximavanov',
+setup(name='assignment',
       version='0.0.1',
       description='Assignment',
       long_description=README,
@@ -65,7 +66,7 @@ setup(name='maximavanov',
       include_package_data=True,
       zip_safe=False,
       test_suite='tests',
-      tests_require=['pytest', 'coverage', 'django-webtest'],
+      tests_require=['pytest', 'coverage'],
       install_requires=requires,
       cmdclass={
           'test': PyTest,
