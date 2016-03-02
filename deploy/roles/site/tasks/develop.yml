@@ -1,0 +1,11 @@
+---
+- name: Populate project's environment
+  sudo: no
+  pip:
+    executable: "{{ site_virtualenv_path }}/bin/pip"
+    requirements: "{{ item }}"
+    state: latest
+  with_items:
+    - "{{ site_pip_requirements_path }}"
+    - "{{ site_pip_local_requirements_path }}"
+    - "{{ site_pip_test_requirements_path }}"
