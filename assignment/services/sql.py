@@ -20,7 +20,7 @@ class SQLService:
 
     async def get_many(self,
                        search_field: Column,
-                       search_value: List[int],
+                       search_value: List[str],
                        limit: Optional[int] = None,
                        offset: int = 0) -> List[BaseEntity]:
         """ Return a collection of matched records up to the specified limit.
