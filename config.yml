@@ -25,6 +25,14 @@ logging:
       formatter: simple
       stream: ext://sys.stdout
   loggers:
+    assignment:
+      level: DEBUG
+      handlers: [console]
+      propagate: no
+    asyncio:
+      level: DEBUG
+      handlers: [console]
+      propagate: no
     aiopg:
       level: DEBUG
       handlers: [console]
