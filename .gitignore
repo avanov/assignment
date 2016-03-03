@@ -4,6 +4,7 @@
 __pycache__/
 .doit.db
 .idea/
+.cache/
 
 build/
 dist/

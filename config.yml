@@ -25,11 +25,11 @@ logging:
       formatter: simple
       stream: ext://sys.stdout
   loggers:
-    assignment:
+    asyncio:
       level: DEBUG
       handlers: [console]
       propagate: no
-    asyncio:
+    aiohttp:
       level: DEBUG
       handlers: [console]
       propagate: no
@@ -37,6 +37,11 @@ logging:
       level: DEBUG
       handlers: [console]
       propagate: no
+    sqlalchemy:
+      level: DEBUG
+      handlers: [console]
+      propagate: yes
   root:
     level: DEBUG
     handlers: [console]
+    propagate: yes

@@ -3,12 +3,23 @@ from assignment.server.entities import BaseEntity
 
 
 class Person(BaseEntity):
+    FIELDS = ('id', 'name', 'traits')
 
     def __init__(self,
+                 name: str,
                  traits: List[int],
                  id: Optional[int] = None):
-        super(BaseEntity, self).__init__(traits=traits,
-                                         id=id)
+        super(Person, self).__init__(
+            name=name,
+            traits=traits,
+            id=id
+        )
 
 class Trait(BaseEntity):
-    pass
+    FIELDS = ('id', 'name')
+
+    def __init__(self,
+                 name: str,
+                 id: Optional[int] = None):
+        super(Trait, self).__init__(name=name, id=id)
+

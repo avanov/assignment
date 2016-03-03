@@ -7,10 +7,10 @@ from assignment.apps import probabilities
 from . import db
 
 
-def init_app(config: Dict[str, Any]) -> Tuple[asyncio.AbstractEventLoop, web.Application]:
-    loop = asyncio.get_event_loop()
-    app = web.Application()
-
+async def init_app(loop: asyncio.AbstractEventLoop,
+                   config: Dict[str, Any]) -> web.Application:
+    app = web.Application(loop=loop,
+                          debug=config['debug'])
     # Setup routes
     # ------------
     app.router.add_route("GET", "/probabilities/{attrs:.+}",
@@ -18,6 +18,6 @@ def init_app(config: Dict[str, Any]) -> Tuple[asyncio.AbstractEventLoop, web.App
 
     # Setup database connection pool
     # ------------------------------
-    engine = loop.run_until_complete(db.setup_database(loop, config))
+    engine = await db.setup_database(loop, config)
     setattr(app, 'dbengine', engine)
-    return loop, app
+    return app

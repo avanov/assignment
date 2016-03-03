@@ -1,5 +1,5 @@
-import argparse
 import asyncio
+import argparse
 import logging
 import logging.config
 from pathlib import Path
@@ -12,14 +12,17 @@ from assignment.server import init_app
 
 
 def main() -> None:
-    conf = parse_app_config(sys.argv[1:])
+    config = parse_app_config(sys.argv[1:])
 
-    logging.config.dictConfig(conf['logging'])
+    logging.config.dictConfig(config['logging'])
     log = logging.getLogger('assignment')
 
-    loop, app = init_app(conf)
+    loop = asyncio.get_event_loop()
+    loop.set_debug(enabled=config['debug'])
+
+    app = loop.run_until_complete(init_app(loop, config))
     handler = app.make_handler()
-    f = loop.create_server(handler, conf['server']['host'], conf['server']['port'])
+    f = loop.create_server(handler, config['server']['host'], config['server']['port'])
     srv = loop.run_until_complete(f)
     log.debug('Serving on {}'.format(srv.sockets[0].getsockname()))
     try:

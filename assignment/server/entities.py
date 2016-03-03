@@ -11,8 +11,8 @@ class BaseEntity:
     }
     DEFAULT_MODIFIERS = {}
 
-    def __init__(self, **kw):
-        for k, v in kw.items():
+    def __init__(self, **kwargs):
+        for k, v in kwargs.items():
             setattr(self, k, v)
 
     def to_dict(self, *fields: Iterable[str]) -> Dict[str, Any]:
