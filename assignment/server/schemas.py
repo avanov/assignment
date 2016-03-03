@@ -1,6 +1,5 @@
-import asyncio
 import sqlalchemy as sa
-from aiopg.sa import create_engine
+from sqlalchemy.dialects.postgresql import ARRAY
 
 
 metadata = sa.MetaData()
@@ -12,5 +11,6 @@ TraitsTbl = sa.Table('traits', metadata,
 
 PeopleTbl = sa.Table('people', metadata,
     sa.Column('id', sa.Integer, primary_key=True),
-    sa.Column('name', sa.String(140), nullable=False, index=True)
+    sa.Column('name', sa.String(140), nullable=False, index=True),
+    sa.Column('traits', ARRAY(sa.Integer, dimensions=1), nullable=False, server_default='{}')
 )
