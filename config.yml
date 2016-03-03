@@ -41,6 +41,10 @@ logging:
       level: DEBUG
       handlers: [console]
       propagate: yes
+    assignment:
+      level: DEBUG
+      handlers: [console]
+      propagate: no
   root:
     level: DEBUG
     handlers: [console]
